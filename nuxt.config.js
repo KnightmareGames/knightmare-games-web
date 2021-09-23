@@ -42,5 +42,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  env : {
+    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID || 'Not Configured'
   }
 }
