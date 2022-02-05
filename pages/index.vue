@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center mx-10 mt-12">
       <div class="flex md:flex flex-wrap justify-center xl:w-4/5 md:mt-12 lg:mt-48 ">
         <h1 class="font-sans text-3xl text-primary font-bold">Who is Knightmare Games?</h1>
         <p class="font-sans text-primary font-light mt-10">Knightmare Games is an independent game development studio working on creative experiences for every platform you can imagine.
