@@ -21,6 +21,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/main.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -38,6 +39,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -50,5 +52,12 @@ export default {
 
   env : {
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID || 'Not Configured'
+  },
+
+  googleFonts: {
+    families: {
+      // a simple name
+      Roboto: true,
+    }
   }
 }
