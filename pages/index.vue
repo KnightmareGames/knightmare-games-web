@@ -33,7 +33,7 @@
         </div>
         <div class="flex flex-col lg:w-1/3 xl:w-1/4  mx-10" >
           <div class="flex justify-center mt-10">
-            <img src="/images/ufo-splash.jpg" alt="Die This World Splash Image" class="mt-16 mb-14">
+            <img src="/images/die-this-world-logo.png" alt="Die This World Splash Image" class="mt-12 mb-14 max-h-64">
           </div>
           <div>
             <h1 class="font-sans text-3xl text-primary font-bold">Die This World</h1>
@@ -51,7 +51,7 @@
       <div class="flex md:flex flex-wrap justify-center xl:w-4/5 md:mt-12 lg:mt-48 ">
         <h1 class="font-sans text-3xl text-primary font-bold">Who is Knightmare Games?</h1>
         <p class="font-sans text-primary font-light mt-10">Knightmare Games is an independent game development studio working on creative experiences for every platform you can imagine.
-          We are a fully distributed team covering the bases from engineering to animation. 
+          We are based in Denver, Colorado but are a fully distributed team covering the bases from engineering to animation. 
           We are always looking for talented people to join with full-time projects, part-time projects, and Game Jams.
           If you are interested in becoming part of our growing community, please get in touch on Discord.
         </p>        
