@@ -3,7 +3,8 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DISCORD_URL, PRESS_EMAIL, PRESS_UPDATED, TINCTURES, factsAsText, games, getGame } from "@/content/games";
-import { Arms } from "@/components/Arms";
+import { GameArt } from "@/components/GameArt";
+import { Band, PageHead } from "@/components/PageHead";
 import { CopyButton } from "@/components/CopyButton";
 import { Downloads } from "@/components/Downloads";
 import { Ledger } from "@/components/Ledger";
@@ -28,28 +29,19 @@ export default async function GamePressKit({ params }: Params) {
 
   return (
     <div style={style}>
-      <section className="section section--top">
-        <div className="wrap presshead">
-          <div>
-            <div className="blazon">
-              <Arms arms={game.arms} id={`press-${game.slug}`} size={56} />
-              <span>Press kit</span>
-            </div>
-            <h1 className="page-title">{game.name}</h1>
-            <p>
-              <strong>Press contact:</strong>{" "}
-              {PRESS_EMAIL ? <a href={`mailto:${PRESS_EMAIL}`}>{PRESS_EMAIL}</a> : <a href={DISCORD_URL} rel="noopener">Discord</a>}
-              {" "}&middot; <Link href={`/games/${game.slug}/`}>Game page</Link>
-            </p>
-            {game.pressZip && (
-              <div className="btns"><a className="btn btn--primary" href={game.pressZip} download>Download everything (.zip)</a></div>
-            )}
-          </div>
+      <PageHead kicker="Press kit" title={game.name} lede={game.tagline} art={<GameArt game={game} className="pagehead__plate" />}>
+        <p className="pagehead__meta">
+          <strong>Press contact:</strong>{" "}
+          {PRESS_EMAIL ? <a href={`mailto:${PRESS_EMAIL}`}>{PRESS_EMAIL}</a> : <a href={DISCORD_URL} rel="noopener">Discord</a>}
+        </p>
+        <div className="btns">
+          {game.pressZip && <a className="btn btn--primary" href={game.pressZip} download>Download everything (.zip)</a>}
+          <Link className={`btn${game.pressZip ? "" : " btn--primary"}`} href={`/games/${game.slug}/`}>Game page</Link>
         </div>
-      </section>
+      </PageHead>
 
-      <section className="section">
-        <div className="wrap split split--facts-first">
+      <Band tone="deep" title="Facts and copy" intro="Copy anything here as-is.">
+        <div className="split">
           <div className="presstext">
             <div className="copyblock">
               <div className="copyblock__head"><h3>Short description</h3><CopyButton text={game.tagline} /></div>
@@ -74,20 +66,17 @@ export default async function GamePressKit({ params }: Params) {
           </div>
           <Ledger facts={game.facts} copyText={factsAsText(game)} seal={PRESS_UPDATED} />
         </div>
-      </section>
+      </Band>
 
-      <section className="section section--lg">
-        <div className="wrap">
-          <div className="section-head"><div className="kicker">The armoury</div><h2>Art and downloads</h2></div>
-          {game.downloads ? (
-            <Downloads items={game.downloads} background={game.art?.background} />
-          ) : (
-            <p className="notice">
-              Art for {game.name} is being gathered.{steam && <> Screenshots are on the <a href={steam} rel="noopener">Steam page</a> in the meantime.</>}
-            </p>
-          )}
-        </div>
-      </section>
+      <Band title="Art and downloads">
+        {game.downloads ? (
+          <Downloads items={game.downloads} background={game.art?.background} />
+        ) : (
+          <p className="notice">
+            Art for {game.name} is being gathered.{steam && <> Screenshots are on the <a href={steam} rel="noopener">Steam page</a> in the meantime.</>}
+          </p>
+        )}
+      </Band>
     </div>
   );
 }

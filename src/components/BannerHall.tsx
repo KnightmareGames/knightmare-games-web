@@ -24,7 +24,7 @@ export function BannerHall({ games }: { games: Game[] }) {
                   <span className="flag__arms"><Arms arms={g.arms} id={`flag-${g.slug}`} size={84} /></span>
                   <span className="flag__name">{g.name}</span>
                   <span className="flag__tagline">{g.tagline}</span>
-                  <span className="flag__status">{g.status}</span>
+                  <span className="status">{g.status}</span>
                 </span>
               </span>
             </Link>

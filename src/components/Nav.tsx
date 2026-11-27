@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 const LINKS = [
   { href: "/#games", label: "Games", match: "/games" },
   { href: "/presskit/", label: "Press", match: "/presskit" },
-  { href: "/play/", label: "Play", match: "/play" },
+  { href: "/#about", label: "About", match: null, className: "pennant--about" },
 ];
 
 export function Nav() {
@@ -13,13 +13,16 @@ export function Nav() {
   return (
     <nav className="nav" aria-label="Main">
       {LINKS.map((l) => {
-        const current = path.startsWith(l.match);
+        const current = l.match !== null && path.startsWith(l.match);
         return (
-          <span key={l.href} className="pennant">
+          <span key={l.href} className={`pennant ${l.className ?? ""}`}>
             <Link href={l.href} aria-current={current ? "page" : undefined}><span>{l.label}</span></Link>
           </span>
         );
       })}
+      <span className="pennant pennant--cta">
+        <Link href="/#contact"><span>Contact</span></Link>
+      </span>
     </nav>
   );
 }

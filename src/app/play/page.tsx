@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { games } from "@/content/games";
 import { GameCard } from "@/components/GameCard";
+import { Band } from "@/components/PageHead";
 
 export const metadata: Metadata = { title: "Play", description: "Browser games from Knightmare Games." };
 
@@ -8,7 +9,7 @@ export const metadata: Metadata = { title: "Play", description: "Browser games f
 export default function Play() {
   return (
     <>
-    <section className="section section--top">
+    <section className="band pagehead">
       <div className="wrap gate">
         <svg width="320" height="349" viewBox="0 0 220 240" aria-hidden="true">
           <path d="M10 236 V60 H30 V30 H60 V60 H90 V30 H130 V60 H160 V30 H190 V60 H210 V236 Z" fill="#e7d8b8" stroke="#15110e" strokeWidth="5" strokeLinejoin="round" />
@@ -26,16 +27,13 @@ export default function Play() {
         </div>
       </div>
     </section>
-    <section className="section section--lg">
-      <div className="wrap">
-        <div className="section-head"><div className="kicker">Meanwhile</div><h2>Until the gate opens</h2></div>
-        <div className="cards">
+    <Band tone="deep" title="Until the gate opens">
+        <div className="cards cards--pair">
           {games.filter((g) => g.slug !== "last-call-for-alcohol").map((g) => (
             <GameCard key={g.slug} game={g} href={`/games/${g.slug}/`} idPrefix="play" />
           ))}
         </div>
-      </div>
-    </section>
+    </Band>
     </>
   );
 }

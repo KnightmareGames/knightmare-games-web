@@ -11,9 +11,10 @@ export function Footer() {
         </div>
         <nav className="site-footer__nav" aria-label="Footer">
           <Link href="/#games">Games</Link>
-          <Link href="/presskit/">Press kits</Link>
-          <Link href="/play/">Play</Link>
-          <a href={DISCORD_URL} rel="noopener">Discord</a>
+          <Link href="/presskit/">Press</Link>
+          <Link href="/#about">About</Link>
+          <Link href="/#contact">Contact</Link>
+          <a href={DISCORD_URL} rel="noopener">Discord ↗</a>
         </nav>
       </div>
     </footer>
