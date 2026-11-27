@@ -220,7 +220,7 @@ h3 { font: 700 23px/1.2 var(--label); letter-spacing: .01em; }
   font: 900 76px/.78 var(--blackletter);
   color: var(--or); background: var(--gules);
   border: var(--line); box-shadow: 4px 4px 0 var(--sable);
-  padding: 4px 10px 0; margin-right: 12px;
+  padding: 4px 10px 0; margin-right: 6px;
 }
  @supports not ((initial-letter: 3) or (-webkit-initial-letter: 3)) {
   .illuminated::first-letter { float: left; padding: 10px 12px 4px; margin: 5px 10px 0 0; }
@@ -338,3 +338,90 @@ h3 { font: 700 23px/1.2 var(--label); letter-spacing: .01em; }
   .crest-download__img { border-right: 0; border-bottom: var(--line); }
   .crest-download figcaption { padding: 0 16px 18px; }
 }
+
+/* ---------- The banner hall (home page games) ----------
+   One rod with finials; each game hangs from it as a swallowtail banner in its own tincture.
+   The ink edge is an outer clipped layer; the cloth is the same shape inset 3px. */
+.hall { position: relative; padding-top: 8px; }
+.hall__rod {
+  position: relative; z-index: 2; height: 18px; margin: 0 -8px -34px;
+  background: var(--sable); border-radius: 9px;
+}
+.hall__rod::before, .hall__rod::after {
+  content: ""; position: absolute; top: 50%; width: 34px; height: 34px; translate: 0 -50%;
+  background: var(--or); border: var(--line); border-radius: 50%;
+}
+.hall__rod::before { left: -26px; }
+.hall__rod::after { right: -26px; }
+.hall__banners { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 0 18px; }
+.flag { display: flex !important; flex-direction: column; }
+.flag__edge { flex: 1; display: flex !important; }
+.flag__cloth { flex: 1; }
+.flag .spark-plate__lockup .arms { display: none; }
+
+.flag {
+  --notch: 54px;
+  display: block; position: relative; text-decoration: none; color: var(--on-cloth);
+  transform-origin: 50% -30px;
+  filter: drop-shadow(8px 8px 0 var(--sable));
+  transition: transform .5s cubic-bezier(.3, 1.6, .5, 1);
+}
+.flag:hover, .flag:focus-visible { transform: rotate(-1.6deg); color: var(--on-cloth); }
+.flag:focus-visible { outline: none; }
+.flag:focus-visible .flag__edge { background: var(--gules); }
+
+.flag__loops { display: flex; justify-content: space-around; padding: 0 14%; height: 34px; }
+.hall__banners { padding-top: 0; }
+.flag__loops span { width: 24px; height: 34px; border: var(--line); border-bottom: 0; background: var(--cloth); border-radius: 12px 12px 0 0; }
+
+.flag__edge, .flag__cloth { display: block; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - var(--notch)), 0 100%); }
+.flag__edge { background: var(--sable); padding: 3px 3px 0; }
+.flag__cloth {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: var(--cloth); padding: 18px 18px calc(var(--notch) + 22px);
+  /* subtle woven texture */
+  background-image: repeating-linear-gradient(0deg, rgb(0 0 0 / .05) 0 2px, transparent 2px 6px);
+  /* inset the notch so the ink edge stays 3px thick along the swallowtail */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3px), 50% calc(100% - var(--notch) - 1px), 0 calc(100% - 3px));
+}
+.flag__art { width: 100%; aspect-ratio: 16 / 10; border: var(--line); }
+.flag__arms { margin-top: -46px; position: relative; z-index: 2; }
+.flag__arms .arms { filter: drop-shadow(4px 4px 0 var(--sable)); }
+.flag__name { font: 900 40px/1 var(--blackletter); margin: 10px 0 10px; text-wrap: balance; }
+.flag__tagline { font-size: 17px; line-height: 1.45; max-width: 30ch; text-wrap: pretty; margin-bottom: 22px; }
+.flag__status {
+  margin-top: auto; font: 700 14px/1 var(--label); text-transform: uppercase; letter-spacing: .12em;
+  background: var(--sable); color: var(--or); padding: 8px 18px 7px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%, 8px 50%);
+}
+@media (prefers-reduced-motion: reduce) { .flag { transition: none; } .flag:hover { transform: none; } }
+
+@media (max-width: 900px) {
+  .hall__rod { display: none; }
+  .hall__banners { grid-template-columns: 1fr; gap: 64px; padding: 0 14px; max-width: 460px; margin-inline: auto; }
+  .flag::before { /* each banner gets its own short rod */
+    content: ""; position: absolute; z-index: 2; top: 2px; left: -16px; right: -16px; height: 14px;
+    background: var(--sable); border-radius: 7px;
+  }
+  .flag__cloth { --notch: 40px; }
+}
+
+/* ---------- The charter (home page About) ---------- */
+.charter {
+  position: relative; background: var(--argent); border: var(--line); box-shadow: var(--shadow-lg);
+  padding: 44px 48px 40px;
+}
+.charter::before { /* a ruled inner border, like a scribe's frame */
+  content: ""; position: absolute; inset: 10px; border: 1.5px solid var(--sable); pointer-events: none;
+}
+.charter { margin-bottom: 70px; }
+.charter__ribbon { position: absolute; left: 50%; bottom: -58px; translate: -50% 0; width: 46px; height: 70px; background: var(--gules); border: var(--line); border-top: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); }
+.charter .seal { position: absolute; left: 50%; bottom: -96px; translate: -50% 0; }
+.charter .seal { transform: rotate(-8deg); }
+.charter .btns { margin-top: 22px; }
+@media (max-width: 600px) {
+  .charter { padding: 32px 24px 40px; }
+  .charter .seal { width: 104px; height: 104px; bottom: -86px; }
+}
+

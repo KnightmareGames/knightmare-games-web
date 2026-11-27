@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DISCORD_URL, games } from "@/content/games";
-import { GameCard } from "@/components/GameCard";
+import { BannerHall } from "@/components/BannerHall";
+import { Seal } from "@/components/Seal";
 import { Proclamation } from "@/components/Proclamation";
 import { Ornament } from "@/components/Ornament";
 import { Crest } from "@/components/Crest";
@@ -34,45 +35,46 @@ export default function Home() {
             <div className="kicker">The games</div>
             <h2>What we&apos;ve made</h2>
           </div>
-          <div className="cards">
-            {games.map((g) => (
-              <GameCard key={g.slug} game={g} href={`/games/${g.slug}/`} />
-            ))}
-          </div>
+          <BannerHall games={games} />
         </div>
       </section>
 
       <div className="wrap"><Ornament /></div>
 
-      <section id="about" className="section">
-        <div className="wrap split">
-          <div>
-            <div className="section-head">
-              <div className="kicker">The studio</div>
-              <h2>About us</h2>
-            </div>
-            <div className="prose">
-              <p className="illuminated">
-                Small and independent, Knightmare Games makes video games, tabletop games, and the odd game jam
-                experiment. We&apos;re drawn to ideas that sound a little strange at first, like playing an RPG as your
-                mouse cursor.
-              </p>
-              <p>Writing about one of our games? Every game has a press kit with facts, descriptions, and art to download.</p>
-            </div>
-            <div className="btns">
-              <Link className="btn btn--primary" href="/presskit/">Press kits</Link>
-              <a className="btn" href={DISCORD_URL} rel="noopener">Join the Discord</a>
-            </div>
+      <section id="about" className="section section--lg">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="kicker">The studio</div>
+            <h2>About us</h2>
           </div>
-          <aside className="ledger">
-            <div className="ledger__title"><span>The studio</span></div>
-            <dl>
-              <div className="ledger__row"><dt>Name</dt><dd>Knightmare Games, Limited</dd></div>
-              <div className="ledger__row"><dt>Games</dt><dd>{games.map((g) => g.name).join(", ")}</dd></div>
-              <div className="ledger__row"><dt>Platforms</dt><dd>PC, Mac, Linux, tabletop</dd></div>
-              <div className="ledger__row"><dt>Web</dt><dd>knightmare.games</dd></div>
-            </dl>
-          </aside>
+          <div className="split">
+            <div className="charter">
+              <div className="prose">
+                <p className="illuminated">
+                  Small and independent, Knightmare Games makes video games, tabletop games, and the odd game jam
+                  experiment. We&apos;re drawn to ideas that sound a little strange at first, like playing an RPG as your
+                  mouse cursor.
+                </p>
+                <p>Writing about one of our games? Every game has a press kit with facts, descriptions, and art to download.</p>
+              </div>
+              <div className="btns">
+                <Link className="btn btn--primary" href="/presskit/">Press kits</Link>
+                <a className="btn" href={DISCORD_URL} rel="noopener">Join the Discord</a>
+              </div>
+              <span className="charter__ribbon" aria-hidden="true" />
+              <Seal ring={"KNIGHTMARE GAMES \u00b7 SEALED \u00b7\u00a0"} lines={["KG", ""]} />
+            </div>
+            <aside className="ledger">
+              <div className="ledger__title"><span>At a glance</span></div>
+              <dl>
+                <div className="ledger__row"><dt>Studio</dt><dd>Knightmare Games, Limited</dd></div>
+                <div className="ledger__row"><dt>Makes</dt><dd>Video games and tabletop games</dd></div>
+                <div className="ledger__row"><dt>On sale</dt><dd>Spark (free, Steam), Last Call for Alcohol (tabletop)</dd></div>
+                <div className="ledger__row"><dt>Coming</dt><dd>Cursor Quest, 2027</dd></div>
+                <div className="ledger__row"><dt>Contact</dt><dd><a href={DISCORD_URL} rel="noopener">Discord</a></dd></div>
+              </dl>
+            </aside>
+          </div>
         </div>
       </section>
     </>

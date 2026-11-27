@@ -1,6 +1,8 @@
-// A wax seal stamped with the date the press kits were last updated.
-export function Seal({ date }: { date: string }) {
-  const [month, year] = date.split(" ");
+// A wax seal. By default it is stamped with the date the press kits were last updated.
+export function Seal({ date, ring, lines }: { date?: string; ring?: string; lines?: [string, string] }) {
+  const [month = "", year = ""] = (date ?? "").split(" ");
+  const [top, bottom] = lines ?? [month.slice(0, 3), year];
+  const ringText = ring ?? "UPDATED \u00b7 PRESS KIT \u00b7\u00a0";
   // An uneven blob of pressed wax: radii vary per lump so it reads as poured, not stamped out.
   const radii = [55, 52, 57, 53, 50, 56, 54, 51, 57, 52, 55, 50];
   const pts = radii.map((r, i) => {
@@ -15,7 +17,7 @@ export function Seal({ date }: { date: string }) {
     })
     .join(" ");
   return (
-    <svg className="seal" width="124" height="124" viewBox="-2 -2 124 124" role="img" aria-label={`Press kit updated ${date}`}>
+    <svg className="seal" width="124" height="124" viewBox="-2 -2 124 124" role="img" aria-label={date ? `Press kit updated ${date}` : ringText}>
       <defs>
         <path id="seal-ring" d="M60 60 m-41 0 a41 41 0 1 1 82 0 a41 41 0 1 1 -82 0" />
       </defs>
@@ -23,10 +25,10 @@ export function Seal({ date }: { date: string }) {
       <circle cx="60" cy="60" r="46" fill="#c8161d" />
       <circle cx="60" cy="60" r="31" fill="none" stroke="#fffaf0" strokeWidth="2" strokeDasharray="3 3" />
       <text className="seal__ring">
-        <textPath href="#seal-ring" textLength="257" lengthAdjust="spacing">UPDATED &#183; PRESS KIT &#183;&#160;</textPath>
+        <textPath href="#seal-ring" textLength="257" lengthAdjust="spacing">{ringText}</textPath>
       </text>
-      <text x="60" y="59" textAnchor="middle" className="seal__month">{month.slice(0, 3)}</text>
-      <text x="60" y="77" textAnchor="middle" className="seal__year">{year}</text>
+      <text x="60" y={bottom ? 59 : 67} textAnchor="middle" className="seal__month">{top}</text>
+      <text x="60" y="77" textAnchor="middle" className="seal__year">{bottom}</text>
     </svg>
   );
 }
