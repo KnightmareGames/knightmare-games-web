@@ -3,6 +3,7 @@ import { DISCORD_URL, PRESS_EMAIL, PRESS_UPDATED, games, pressKitHref } from "@/
 import { GameCard } from "@/components/GameCard";
 import { Ledger } from "@/components/Ledger";
 import { Band, PageHead } from "@/components/PageHead";
+import { Crest } from "@/components/Crest";
 
 export const metadata: Metadata = {
   title: "Press kits",
@@ -16,6 +17,7 @@ export default function PressKitIndex() {
         kicker="Press kits"
         title="For press &amp; creators"
         lede="Knightmare Games is an independent studio making video games and tabletop games. Each kit has a fact sheet, descriptions you can copy, and art to download."
+        art={<Crest />}
       >
         <p className="pagehead__meta">
           <strong>Press contact:</strong>{" "}

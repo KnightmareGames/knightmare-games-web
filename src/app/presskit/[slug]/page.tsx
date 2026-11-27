@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import { statSync } from "node:fs";
+import { join } from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DISCORD_URL, PRESS_EMAIL, PRESS_UPDATED, TINCTURES, factsAsText, games, getGame } from "@/content/games";
@@ -11,6 +13,16 @@ import { Ledger } from "@/components/Ledger";
 
 type Params = { params: Promise<{ slug: string }> };
 
+// The size of a file under /public, for download labels. Runs at build time only.
+function sizeOf(href: string): string | null {
+  try {
+    const mb = statSync(join(process.cwd(), "public", href)).size / 1e6;
+    return mb >= 1 ? `${mb.toFixed(1)} MB` : `${Math.max(1, Math.round(mb * 1000))} KB`;
+  } catch {
+    return null;
+  }
+}
+
 // Games whose press kit is a standalone page in /public are skipped here.
 export function generateStaticParams() {
   return games.filter((g) => !g.pressKitHref).map((g) => ({ slug: g.slug }));
@@ -18,7 +30,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const game = getGame((await params).slug);
-  return game ? { title: `${game.name} press kit`, description: game.tagline } : {};
+  if (!game) return {};
+  const image = game.art?.src ?? `/assets/img/${game.slug}/title-plate.webp`;
+  const title = `${game.name} press kit`;
+  return { title, description: game.tagline, openGraph: { title, description: game.tagline, images: [image] } };
 }
 
 export default async function GamePressKit({ params }: Params) {
@@ -35,7 +50,7 @@ export default async function GamePressKit({ params }: Params) {
           {PRESS_EMAIL ? <a href={`mailto:${PRESS_EMAIL}`}>{PRESS_EMAIL}</a> : <a href={DISCORD_URL} rel="noopener">Discord</a>}
         </p>
         <div className="btns">
-          {game.pressZip && <a className="btn btn--primary" href={game.pressZip} download>Download everything (.zip)</a>}
+          {game.pressZip && <a className="btn btn--primary" href={game.pressZip} download>Download everything (.zip{sizeOf(game.pressZip) ? `, ${sizeOf(game.pressZip)}` : ""})</a>}
           <Link className={`btn${game.pressZip ? "" : " btn--primary"}`} href={`/games/${game.slug}/`}>Game page</Link>
         </div>
       </PageHead>
@@ -70,7 +85,7 @@ export default async function GamePressKit({ params }: Params) {
 
       <Band title="Art and downloads">
         {game.downloads ? (
-          <Downloads items={game.downloads} background={game.art?.background} />
+          <Downloads items={game.downloads.map((d) => ({ ...d, detail: [d.detail, sizeOf(d.file)].filter(Boolean).join(", ") }))} background={game.art?.background} />
         ) : (
           <p className="notice">
             Art for {game.name} is being gathered.{steam && <> Screenshots are on the <a href={steam} rel="noopener">Steam page</a> in the meantime.</>}

@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://knightmare.games"),
   title: { default: "Knightmare Games", template: "%s | Knightmare Games" },
   description: "Knightmare Games makes Cursor Quest, Spark, and Last Call for Alcohol.",
-  openGraph: { images: ["/assets/img/brand/knightmare-logo-1024.png"], type: "website" },
+  openGraph: { siteName: "Knightmare Games", title: "Knightmare Games", images: ["/assets/img/brand/knightmare-logo-1024.png"], type: "website" },
+  twitter: { card: "summary_large_image" },
   icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
 };
 

@@ -18,14 +18,16 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const game = getGame((await params).slug);
-  return game ? { title: game.name, description: game.tagline } : {};
+  if (!game) return {};
+  const image = game.art?.src ?? `/assets/img/${game.slug}/title-plate.webp`;
+  return { title: game.name, description: game.tagline, openGraph: { title: game.name, description: game.tagline, images: [image] } };
 }
 
 export default async function GamePage({ params }: Params) {
   const game = getGame((await params).slug);
   if (!game) notFound();
   const style = { "--accent": game.accent, "--on-accent": game.accent === TINCTURES.or ? TINCTURES.sable : TINCTURES.argent } as CSSProperties;
-  const [lede, ...rest] = game.description;
+  const lede = game.description[0];
 
   return (
     <div style={style}>
@@ -37,15 +39,12 @@ export default async function GamePage({ params }: Params) {
         </div>
       </PageHead>
 
-      <Band tone="deep" title={game.featuresHeading}>
-        <Features items={game.features} />
+      <Band tone="deep" title="At a glance">
+        <Ledger facts={game.facts} wide />
       </Band>
 
-      <Band title="The details">
-        <div className="split">
-          <div className="prose">{rest.map((p, i) => <p key={i}>{p}</p>)}</div>
-          <Ledger facts={game.facts} />
-        </div>
+      <Band title={game.featuresHeading}>
+        <Features items={game.features} />
       </Band>
 
       <Band tone="deep" title="Other games">

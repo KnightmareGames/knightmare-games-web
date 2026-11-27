@@ -22,7 +22,7 @@ export default function Home() {
         </div>
       </PageHead>
 
-      <Band id="games" tone="deep" title="Our games" intro="Pick one for its trailer, its store page, and the full story.">
+      <Band id="games" tone="deep" title="Our games" intro="Three games, three very different evenings.">
         <div className="hall-wrap"><BannerHall games={games} /></div>
         <div className="game-rows">
           {games.map((g) => <GameCard key={g.slug} game={g} href={`/games/${g.slug}/`} idPrefix="row" row />)}
@@ -34,11 +34,10 @@ export default function Home() {
           <div className="charter">
             <div className="prose">
               <p className="illuminated">
-                Small and independent, Knightmare Games makes video games, tabletop games, and the odd game jam
+                We&apos;re a small, independent studio making video games, tabletop games, and the odd game jam
                 experiment. We&apos;re drawn to ideas that sound a little strange at first, like playing an RPG as your
-                mouse cursor.
+                mouse cursor, and we keep going until they feel obvious.
               </p>
-              <p>Spark is our free arcade shooter on Steam, Last Call for Alcohol is our party card game, and Cursor Quest is the one we&apos;re making now.</p>
             </div>
             <span className="charter__ribbon" aria-hidden="true" />
             <Seal ring={"KNIGHTMARE GAMES · SEALED · "} lines={["KG", ""]} />
@@ -47,9 +46,9 @@ export default function Home() {
             <div className="ledger__title"><span>The studio</span></div>
             <dl>
               <div className="ledger__row"><dt>Name</dt><dd>Knightmare Games, Limited</dd></div>
-              <div className="ledger__row"><dt>Makes</dt><dd>Video games and tabletop games</dd></div>
-              <div className="ledger__row"><dt>Games</dt><dd>{games.length}, one in development</dd></div>
-              <div className="ledger__row"><dt>Contact</dt><dd><a href={DISCORD_URL} rel="noopener">Discord</a></dd></div>
+              <div className="ledger__row"><dt>Now making</dt><dd><Link href="/games/cursor-quest/">Cursor Quest</Link>, out in 2027</dd></div>
+              <div className="ledger__row"><dt>Press</dt><dd><Link href="/presskit/">Press kits</Link> for every game</dd></div>
+              <div className="ledger__row"><dt>Community</dt><dd><a href={DISCORD_URL} rel="noopener">Discord</a></dd></div>
             </dl>
           </aside>
         </div>

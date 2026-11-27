@@ -84,9 +84,9 @@ export const games: Game[] = [
       { label: "Release", value: "2027" },
       { label: "Store", value: "Steam", href: CQ_STEAM },
     ],
-    featuresHeading: "Features",
+    featuresHeading: "Your cursor, armed",
     features: [
-      { title: "Your cursor is the hero", text: "You don't steer a hero with your mouse. Your cursor is the hero: it holds the sword, takes the hits, and earns the levels." },
+      { title: "Your cursor is the hero", text: "No avatar and no click-to-move. The arrow holds the sword, takes the hits, and earns the levels." },
       { title: "Put your mouse skills to the test", text: "Your cursor movement drives positioning and weapons. Build momentum for a strike, dodge clear, and cast spells with a flick of the wrist." },
       { title: "Build your cursor", text: "Sword and shield, two-handers, or spells. Mix in capes, prayers, pets, and rare gear to find a loadout that fits." },
       { title: "Real skill progression", text: "Chop trees, mine ore, and fish with real cursor movement. Skills grow as you use them and unlock better resources and gear." },
@@ -102,11 +102,16 @@ export const games: Game[] = [
     arms: { field: ["sable"], charge: "bezants", chargeTincture: "or", blazon: "Sable, four bezants in cross" },
     tagline: "A free, combo-driven shoot 'em up with three arcade modes and Steam leaderboards.",
     description: [
-      "Spark is a creative, combo-centric shoot 'em up: three arcade games in one, built around climbing the leaderboards.",
-      "Four bullet types, each with its own power and speed, feed a combo system that every mode is built on. Learn them, chain them, and push your score up the boards.",
+      "Spark is a free shoot 'em up with three arcade games in one, built on four bullet types and the combos between them.",
+      "Each bullet type trades power for speed. Learn them, chain them, and push your score up the Steam leaderboards.",
     ],
     tags: ["Shoot 'em up", "Windows, Mac"],
     primaryLink: { label: "Play free on Steam", href: SPARK_STEAM },
+    downloads: [
+      { label: "Logo", detail: "PNG, 1368 x 504, transparent", preview: "/assets/img/spark/logo.webp", file: "/assets/press/spark/logo.png" },
+      { label: "Title plate", detail: "PNG, 1920 x 1200", preview: "/assets/img/spark/title-plate.webp", file: "/assets/press/spark/title-plate.png" },
+    ],
+    pressZip: "/assets/press/spark.zip",
     facts: [
       { label: "Developer", value: "Knightmare Games, Limited" },
       { label: "Genre", value: "Shoot 'em up, arcade" },
