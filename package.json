@@ -3,10 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "prebuild": "node scripts/press-zips.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve out",
-    "lint": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "^16.4.6",

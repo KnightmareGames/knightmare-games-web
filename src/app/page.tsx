@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { DISCORD_URL, games } from "@/content/games";
 import { GameCard } from "@/components/GameCard";
-import { Marquee } from "@/components/Marquee";
+import { Proclamation } from "@/components/Proclamation";
 import { Ornament } from "@/components/Ornament";
+import { Crest } from "@/components/Crest";
 
 export default function Home() {
   return (
@@ -10,35 +11,28 @@ export default function Home() {
       <section className="hero">
         <div className="wrap hero__inner">
           <div className="hero__text">
-            <div className="kicker">Independent game works &middot; Video &amp; tabletop</div>
-            <h1 className="hero__title">
-              Knightmare <span>Games</span>
-            </h1>
+            <div className="kicker">Independent game studio</div>
+            <h1 className="hero__title">Here be games.</h1>
             <p className="hero__lede">
-              Strange little games, forged with care. We make action RPGs you play as your mouse cursor, arcade
-              shooters, and card games for the last round of the night.
+              We make <strong className="nowrap">Cursor Quest</strong>, an action RPG you play as your mouse cursor; <strong className="nowrap">Spark</strong>, a
+              free arcade shoot &apos;em up; and <strong>Last Call for Alcohol</strong>, a drinking card game.
             </p>
             <div className="btns">
-              <Link className="btn btn--blood" href="#games">See the games</Link>
+              <Link className="btn btn--primary" href="#games">See the games</Link>
               <Link className="btn" href="/presskit/">Press kits</Link>
             </div>
           </div>
-          <div className="hero__crest">
-            <div className="crest">
-              <img src="/assets/img/brand/knightmare-logo-512.webp" alt="Knightmare Games crest" width={512} height={466} />
-            </div>
-            <div className="seal" aria-hidden="true"><span>KG</span></div>
-          </div>
+          <div className="hero__crest-wrap"><Crest /></div>
         </div>
       </section>
 
-      <Marquee items={["Hear ye, hear ye", "Cursor Quest: coming 2027", "Spark: free on Steam", "Last Call for Alcohol: 3 to 12 players"]} />
+      <Proclamation items={["Cursor Quest: wishlist now on Steam", "Spark: free on Steam", "Last Call for Alcohol: 3 to 12 players, 21+", "Press kits for every game"]} />
 
-      <section id="games" className="section">
+      <section id="games" className="section section--lg">
         <div className="wrap">
           <div className="section-head">
-            <div className="kicker">Folio I</div>
-            <h2>The Works</h2>
+            <div className="kicker">The games</div>
+            <h2>What we&apos;ve made</h2>
           </div>
           <div className="cards">
             {games.map((g) => (
@@ -54,28 +48,28 @@ export default function Home() {
         <div className="wrap split">
           <div>
             <div className="section-head">
-              <div className="kicker">Folio II</div>
-              <h2>Of the Studio</h2>
+              <div className="kicker">The studio</div>
+              <h2>About us</h2>
             </div>
             <div className="prose">
               <p className="illuminated">
-                Knightmare Games is an independent game studio. We make video games, tabletop games, and the occasional
-                game jam experiment, and we like ideas that sound a little strange at first, like playing an RPG as your
+                Small and independent, Knightmare Games makes video games, tabletop games, and the odd game jam
+                experiment. We&apos;re drawn to ideas that sound a little strange at first, like playing an RPG as your
                 mouse cursor.
               </p>
-              <p>Press and creators: every game has a press kit with facts, descriptions, and downloadable art.</p>
+              <p>Writing about one of our games? Every game has a press kit with facts, descriptions, and art to download.</p>
             </div>
             <div className="btns">
-              <Link className="btn btn--gold" href="/presskit/">Press kits</Link>
+              <Link className="btn btn--primary" href="/presskit/">Press kits</Link>
               <a className="btn" href={DISCORD_URL} rel="noopener">Join the Discord</a>
             </div>
           </div>
           <aside className="ledger">
-            <div className="ledger__title">The ledger</div>
+            <div className="ledger__title"><span>The studio</span></div>
             <dl>
-              <div className="ledger__row"><dt>Studio</dt><dd>Knightmare Games, Limited</dd></div>
-              <div className="ledger__row"><dt>Works</dt><dd>{games.map((g) => g.name).join(", ")}</dd></div>
-              <div className="ledger__row"><dt>Realms</dt><dd>PC, Mac, Linux, tabletop</dd></div>
+              <div className="ledger__row"><dt>Name</dt><dd>Knightmare Games, Limited</dd></div>
+              <div className="ledger__row"><dt>Games</dt><dd>{games.map((g) => g.name).join(", ")}</dd></div>
+              <div className="ledger__row"><dt>Platforms</dt><dd>PC, Mac, Linux, tabletop</dd></div>
               <div className="ledger__row"><dt>Web</dt><dd>knightmare.games</dd></div>
             </dl>
           </aside>

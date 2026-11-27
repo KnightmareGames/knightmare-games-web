@@ -1,61 +1,82 @@
 import type { Metadata } from "next";
-import { DISCORD_URL, games, pressKitHref } from "@/content/games";
+import { DISCORD_URL, PRESS_EMAIL, PRESS_UPDATED, games, pressKitHref } from "@/content/games";
 import { GameCard } from "@/components/GameCard";
-import { Downloads } from "@/components/Downloads";
+import { Ledger } from "@/components/Ledger";
 
 export const metadata: Metadata = {
-  title: "Press kit",
+  title: "Press kits",
   description: "Press kits for Knightmare Games and its games: facts, descriptions, logos, and art.",
 };
 
 export default function PressKitIndex() {
   return (
     <>
-      <section className="section">
-        <div className="wrap split">
+      <section className="section section--top">
+        <div className="wrap presshead">
           <div>
-            <div className="kicker">Press kit</div>
-            <h1 className="page-title">Knightmare Games</h1>
+            <div className="kicker">Press kits</div>
+            <h1 className="page-title">For press &amp; creators</h1>
             <div className="prose">
-              <p className="illuminated">
-                Knightmare Games is an independent game studio making video games and tabletop games. Our games include
-                Cursor Quest, an action RPG where you play as your mouse cursor; Spark, a free combo-driven shoot
-                &apos;em up; and Last Call for Alcohol, a fast drinking card game.
+              <p className="lede">
+                Knightmare Games is an independent game studio making video games and tabletop games. Pick a game below
+                for its fact sheet, descriptions you can copy, and art you can download.
               </p>
               <p>
-                For press, review copies, or interviews, reach us on <a href={DISCORD_URL} rel="noopener">Discord</a>.
+                <strong>Press contact:</strong>{" "}
+                {PRESS_EMAIL ? <a href={`mailto:${PRESS_EMAIL}`}>{PRESS_EMAIL}</a> : <a href={DISCORD_URL} rel="noopener">Discord</a>}
               </p>
             </div>
           </div>
-          <aside className="ledger">
-            <div className="ledger__title">The ledger</div>
-            <dl>
-              <div className="ledger__row"><dt>Studio</dt><dd>Knightmare Games, Limited</dd></div>
-              <div className="ledger__row"><dt>Web</dt><dd>knightmare.games</dd></div>
-            </dl>
-          </aside>
         </div>
       </section>
       <section className="section">
         <div className="wrap">
-          <div className="section-head"><h2>Game press kits</h2></div>
+          <div className="section-head"><div className="kicker">By game</div><h2>Game press kits</h2></div>
           <div className="cards">
             {games.map((g) => (
-              <GameCard key={g.slug} game={g} href={pressKitHref(g)} />
+              <GameCard key={g.slug} game={g} href={pressKitHref(g)} idPrefix="press" />
             ))}
           </div>
         </div>
       </section>
-      <section className="section">
+      <section className="section section--lg">
         <div className="wrap">
-          <div className="section-head"><h2>Studio crest</h2></div>
-          <Downloads
-            background="var(--parchment-2)"
-            items={[
-              { label: "Crest, transparent PNG (2048 px)", preview: "/assets/img/brand/knightmare-logo-512.webp", file: "/assets/press/knightmare-logo-2048.png" },
-              { label: "Crest, transparent PNG (1024 px)", preview: "/assets/img/brand/knightmare-logo-512.webp", file: "/assets/img/brand/knightmare-logo-1024.png" },
-            ]}
-          />
+          <div className="section-head"><div className="kicker">The studio</div><h2>Logo and facts</h2></div>
+          <div className="split">
+            <figure className="crest-download">
+              <div className="crest-download__img">
+                <img src="/assets/img/brand/knightmare-logo-512.webp" alt="Knightmare Games logo" width={512} height={466} />
+              </div>
+              <figcaption>
+                <div className="download__label">Knightmare Games logo</div>
+                <div className="download__detail">Transparent PNG</div>
+                <div className="btns">
+                  <a className="btn btn--small" href="/assets/press/studio/crest-2048.png" download>2048 px</a>
+                  <a className="btn btn--small" href="/assets/press/studio/crest-1024.png" download>1024 px</a>
+                </div>
+                <div className="swatches" aria-label="Studio colours">
+                  {[["Ink", "#15110E"], ["Red", "#C8161D"], ["Gold", "#E8AC1C"], ["Parchment", "#F1E6CF"]].map(([name, hex]) => (
+                    <span key={hex}>
+                      <span className="swatch" style={{ background: hex }} />
+                      {name}
+                      <small>{hex}</small>
+                    </span>
+                  ))}
+                </div>
+              </figcaption>
+            </figure>
+            <Ledger
+              title="The studio"
+              seal={PRESS_UPDATED}
+              facts={[
+                { label: "Name", value: "Knightmare Games, Limited" },
+                { label: "Games", value: games.map((g) => g.name).join(", ") },
+                { label: "Platforms", value: "PC, Mac, Linux, tabletop" },
+                { label: "Web", value: "knightmare.games", href: "https://knightmare.games" },
+                PRESS_EMAIL ? { label: "Press", value: PRESS_EMAIL, href: `mailto:${PRESS_EMAIL}` } : { label: "Contact", value: "Discord", href: DISCORD_URL },
+              ]}
+            />
+          </div>
         </div>
       </section>
     </>
