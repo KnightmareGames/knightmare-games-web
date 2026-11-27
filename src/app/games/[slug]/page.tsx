@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const game = getGame((await params).slug);
   if (!game) return {};
   const image = game.art?.src ?? `/assets/img/${game.slug}/title-plate.webp`;
-  return { title: game.name, description: game.tagline, openGraph: { title: game.name, description: game.tagline, images: [image] } };
+  return { title: game.name, description: game.tagline, openGraph: { title: game.name, description: game.tagline, images: [{ url: image, alt: game.art?.alt ?? `${game.name} title art` }] } };
 }
 
 export default async function GamePage({ params }: Params) {

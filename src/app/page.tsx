@@ -40,15 +40,15 @@ export default function Home() {
               </p>
             </div>
             <span className="charter__ribbon" aria-hidden="true" />
-            <Seal ring={"KNIGHTMARE GAMES · SEALED · "} lines={["KG", ""]} />
+            <Seal ring={"KNIGHTMARE GAMES · KNIGHTMARE GAMES · "} lines={["KG", ""]} />
           </div>
           <aside className="ledger">
             <div className="ledger__title"><span>The studio</span></div>
             <dl>
               <div className="ledger__row"><dt>Name</dt><dd>Knightmare Games, Limited</dd></div>
-              <div className="ledger__row"><dt>Now making</dt><dd><Link href="/games/cursor-quest/">Cursor Quest</Link>, out in 2027</dd></div>
+              <div className="ledger__row"><dt>Making</dt><dd><Link href="/games/cursor-quest/">Cursor Quest</Link>, out in 2027</dd></div>
               <div className="ledger__row"><dt>Press</dt><dd><Link href="/presskit/">Press kits</Link> for every game</dd></div>
-              <div className="ledger__row"><dt>Community</dt><dd><a href={DISCORD_URL} rel="noopener">Discord</a></dd></div>
+              <div className="ledger__row"><dt>Discord</dt><dd><a href={DISCORD_URL} rel="noopener">Join the community</a></dd></div>
             </dl>
           </aside>
         </div>

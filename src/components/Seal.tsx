@@ -17,7 +17,7 @@ export function Seal({ date, ring, lines }: { date?: string; ring?: string; line
     })
     .join(" ");
   return (
-    <svg className="seal" width="124" height="124" viewBox="-2 -2 124 124" role="img" aria-label={date ? `Press kit updated ${date}` : ringText}>
+    <svg className="seal" width="124" height="124" viewBox="-2 -2 124 124" {...(date ? { role: "img", "aria-label": `Press kit updated ${date}` } : { "aria-hidden": true })}>
       <defs>
         <path id="seal-ring" d="M60 60 m-41 0 a41 41 0 1 1 82 0 a41 41 0 1 1 -82 0" />
       </defs>

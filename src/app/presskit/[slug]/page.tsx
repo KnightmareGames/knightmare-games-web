@@ -17,7 +17,7 @@ type Params = { params: Promise<{ slug: string }> };
 function sizeOf(href: string): string | null {
   try {
     const mb = statSync(join(process.cwd(), "public", href)).size / 1e6;
-    return mb >= 1 ? `${mb.toFixed(1)} MB` : `${Math.max(1, Math.round(mb * 1000))} KB`;
+    return mb >= 1 ? `${mb.toFixed(1)}\u00a0MB` : `${Math.max(1, Math.round(mb * 1000))}\u00a0KB`;
   } catch {
     return null;
   }
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!game) return {};
   const image = game.art?.src ?? `/assets/img/${game.slug}/title-plate.webp`;
   const title = `${game.name} press kit`;
-  return { title, description: game.tagline, openGraph: { title, description: game.tagline, images: [image] } };
+  return { title, description: game.tagline, openGraph: { title, description: game.tagline, images: [{ url: image, alt: game.art?.alt ?? `${game.name} title art` }] } };
 }
 
 export default async function GamePressKit({ params }: Params) {
@@ -50,7 +50,7 @@ export default async function GamePressKit({ params }: Params) {
           {PRESS_EMAIL ? <a href={`mailto:${PRESS_EMAIL}`}>{PRESS_EMAIL}</a> : <a href={DISCORD_URL} rel="noopener">Discord</a>}
         </p>
         <div className="btns">
-          {game.pressZip && <a className="btn btn--primary" href={game.pressZip} download>Download everything (.zip{sizeOf(game.pressZip) ? `, ${sizeOf(game.pressZip)}` : ""})</a>}
+          {game.pressZip && <a className="btn btn--primary" href={game.pressZip} download>Download all&nbsp;<span className="nowrap">(ZIP{sizeOf(game.pressZip) ? `, ${sizeOf(game.pressZip)}` : ""})</span></a>}
           <Link className={`btn${game.pressZip ? "" : " btn--primary"}`} href={`/games/${game.slug}/`}>Game page</Link>
         </div>
       </PageHead>

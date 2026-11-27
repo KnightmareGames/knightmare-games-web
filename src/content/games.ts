@@ -70,7 +70,7 @@ export const games: Game[] = [
     arms: { field: ["or", "vert"], charge: "cursor", chargeTincture: "sable", blazon: "Per bend Or and Vert, a cursor Sable fimbriated Argent" },
     tagline: "A single-player action RPG where you play as your mouse cursor.",
     description: [
-      "Your mouse cursor has spent enough time just clicking on things. It wants to do more. It wants to adventure!",
+      "Your mouse cursor is the hero. Swing a sword with a flick of the wrist, dodge on reflex, and level up by chopping, mining, and fishing with real cursor movement.",
       "Cursor Quest is a single-player action RPG where you play as your cursor. Swing weapons, defeat monsters, gather resources, craft gear, find epic and rare equipment, and work your way through dozens of handcrafted regions.",
     ],
     tags: ["Action RPG", "PC, Mac, Linux"],
@@ -81,7 +81,7 @@ export const games: Game[] = [
       { label: "Players", value: "Single-player" },
       { label: "Platforms", value: "Windows, macOS (Apple Silicon), Linux" },
       { label: "Input", value: "Mouse and keyboard" },
-      { label: "Release", value: "2027" },
+      { label: "Release", value: "2027, wishlist now on Steam" },
       { label: "Store", value: "Steam", href: CQ_STEAM },
     ],
     featuresHeading: "Your cursor, armed",
@@ -102,14 +102,14 @@ export const games: Game[] = [
     arms: { field: ["sable"], charge: "bezants", chargeTincture: "or", blazon: "Sable, four bezants in cross" },
     tagline: "A free, combo-driven shoot 'em up with three arcade modes and Steam leaderboards.",
     description: [
-      "Spark is a free shoot 'em up with three arcade games in one, built on four bullet types and the combos between them.",
-      "Each bullet type trades power for speed. Learn them, chain them, and push your score up the Steam leaderboards.",
+      "Spark is a free shoot 'em up with three arcade modes, built on four bullet types and the combos between them.",
+      "Learn the bullets, chain the combos, and push your score up the Steam leaderboards.",
     ],
     tags: ["Shoot 'em up", "Windows, Mac"],
     primaryLink: { label: "Play free on Steam", href: SPARK_STEAM },
     downloads: [
-      { label: "Logo", detail: "PNG, 1368 x 504, transparent", preview: "/assets/img/spark/logo.webp", file: "/assets/press/spark/logo.png" },
-      { label: "Title plate", detail: "PNG, 1920 x 1200", preview: "/assets/img/spark/title-plate.webp", file: "/assets/press/spark/title-plate.png" },
+      { label: "Logo", detail: "PNG, 1368 × 504, transparent", preview: "/assets/img/spark/logo.webp", file: "/assets/press/spark/logo.png" },
+      { label: "Title plate", detail: "PNG, 1920 × 1200", preview: "/assets/img/spark/title-plate.webp", file: "/assets/press/spark/title-plate.png" },
     ],
     pressZip: "/assets/press/spark.zip",
     facts: [
@@ -155,7 +155,7 @@ export const games: Game[] = [
     featuresHeading: "How it plays",
     features: [
       { title: "Three actions", text: "Swap, Shift, or Skip to end up holding the lowest card on the table. The higher your card, the more you drink." },
-      { title: "Know only your own card", text: "You only know the value of your own card. Read your friends and work out everyone else's." },
+      { title: "Know only your own card", text: "Read your friends and work out everyone else's." },
       { title: "Fast rounds", text: "First player to go over 20 points, or to turn over the X card, ends the game. Lowest score wins." },
       { title: "Any group size", text: "Quick to learn for new players, with enough strategy that veterans still have an edge. Plays 3 to 12." },
     ],
@@ -169,9 +169,9 @@ export const games: Game[] = [
       ],
     },
     downloads: [
-      { label: "Deck and box", detail: "PNG, 875 x 814, transparent", preview: "/assets/img/lc4a/deck-and-box.webp", file: "/assets/press/last-call-for-alcohol/deck-and-box.png" },
-      { label: "Cards", detail: "PNG, 2000 x 1613, transparent", preview: "/assets/img/lc4a/floating-cards.webp", file: "/assets/press/last-call-for-alcohol/cards.png" },
-      { label: "Logo", detail: "PNG, 385 x 157, transparent", preview: "/assets/img/lc4a/logo.png", file: "/assets/press/last-call-for-alcohol/logo.png" },
+      { label: "Deck and box", detail: "PNG, 875 × 814, transparent", preview: "/assets/img/lc4a/deck-and-box.webp", file: "/assets/press/last-call-for-alcohol/deck-and-box.png" },
+      { label: "Cards", detail: "PNG, 2000 × 1613, transparent", preview: "/assets/img/lc4a/floating-cards.webp", file: "/assets/press/last-call-for-alcohol/cards.png" },
+      { label: "Logo", detail: "PNG, 385 × 157, transparent", preview: "/assets/img/lc4a/logo.png", file: "/assets/press/last-call-for-alcohol/logo.png" },
       { label: "Sell sheet", detail: "PDF, 1 page", preview: "/assets/img/lc4a/sell-sheet.jpg", file: "/assets/press/last-call-for-alcohol/sell-sheet.pdf" },
     ],
     pressZip: "/assets/press/last-call-for-alcohol.zip",
