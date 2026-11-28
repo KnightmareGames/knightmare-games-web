@@ -1,69 +1,23 @@
-# knightmare-games
+# knightmare.games
 
-## Build Setup
+The Knightmare Games studio site. Next.js (App Router) with static export, hosted free on GitHub Pages.
+
+## Run it
 
 ```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # writes the static site to out/
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+## Where things are
 
-## Special Directories
+- `src/content/games.ts`: every game's text, facts, features, links and press downloads. The first game is featured on the home page; the rest are cards. Each gets a page at `/games/<slug>/` and a press kit at `/presskit/<slug>/`.
+- `src/app/`: the pages (home, `games/[slug]`, `presskit`, `presskit/[slug]`, 404).
+- `src/components/`: header, footer, cards, the ledger (fact sheet), features, downloads.
+- `src/app/globals.css`: the whole look. Neobrutalist (thick ink borders, hard offset shadows) with manuscript and heraldry touches (blackletter titles, illuminated initials, a crest).
+- `public/`: images, press downloads (`assets/press/<game>/`, zipped at build), and `CNAME`.
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+## Deploying
 
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every push to `master`. One-time setup in the repo: Settings > Pages > Source: **GitHub Actions**, custom domain `knightmare.games`.
