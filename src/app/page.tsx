@@ -5,7 +5,6 @@ import { Email } from "@/components/Email";
 import { GameArt } from "@/components/GameArt";
 import { GameCard } from "@/components/GameCard";
 import { Band, PageHead } from "@/components/PageHead";
-import { Seal } from "@/components/Seal";
 import { Status } from "@/components/Status";
 import { Trailer } from "@/components/Trailer";
 
@@ -26,7 +25,7 @@ export default function Home() {
         <div className="split split--center">
           {featured.trailer ? <Trailer trailer={featured.trailer} /> : <GameArt game={featured} className="pagehead__plate" />}
           <div>
-            <p className="lede">{featured.description[0]}</p>
+            <p className="lede">{featured.shortDescription ?? featured.description[0]}</p>
             <p><Status>{featured.status}</Status></p>
             <div className="btns">
               <a className="btn btn--primary" href={featured.primaryLink.href} rel="noopener">{featured.primaryLink.label}</a>
@@ -51,8 +50,6 @@ export default function Home() {
               mouse cursor, and we keep going until they feel obvious.
             </p>
           </div>
-          <span className="charter__ribbon" aria-hidden="true" />
-          <Seal ring={"KNIGHTMARE GAMES · KNIGHTMARE GAMES · "} lines={["KG", ""]} />
         </div>
       </Band>
 

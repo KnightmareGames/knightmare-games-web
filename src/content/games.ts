@@ -42,8 +42,10 @@ export type Game = {
   /** Page accent; also the card's hover shadow. */
   accent: string;
   arms: Arms;
-  /** One line for cards and press kits. */
+  /** One line for cards. */
   tagline: string;
+  /** The store page's short description, when it differs from the tagline. */
+  shortDescription?: string;
   /** Paragraphs for the game page and press kit. */
   description: string[];
   tags: string[];
@@ -80,9 +82,11 @@ export const games: Game[] = [
     status: "Coming 2027",
     accent: TINCTURES.vert,
     arms: { field: ["or", "vert"], charge: "cursor", chargeTincture: "sable", blazon: "Per bend Or and Vert, a cursor Sable fimbriated Argent" },
-    tagline: "A single-player action RPG where you play as your mouse cursor.",
+    tagline: "An action RPG where your mouse cursor is the character.",
+    shortDescription:
+      "Cursor Quest is an action RPG where your mouse cursor is the character. Swing weapons with your movement, dodge attacks, gather resources, train skills, craft gear, explore dungeons, and grow your cursor into a fantasy hero.",
     description: [
-      "Your mouse cursor is the hero. Swing a sword with a flick of the wrist, dodge on reflex, and level up by chopping, mining, and fishing with real cursor movement.",
+      "Your mouse cursor has spent enough time just clicking on things. It wants to do more. It wants to adventure!",
       "Cursor Quest is a single-player action RPG where you play as your cursor. Swing weapons, defeat monsters, gather resources, craft gear, find epic and rare equipment, and work your way through dozens of handcrafted regions.",
     ],
     tags: ["Action RPG", "PC, Mac, Linux"],
@@ -90,19 +94,35 @@ export const games: Game[] = [
     primaryLink: { label: "Wishlist on Steam", href: CQ_STEAM },
     facts: [
       { label: "Developer", value: "Knightmare Games, Limited" },
-      { label: "Genre", value: "Action RPG" },
-      { label: "Players", value: "Single-player" },
+      { label: "Publisher", value: "Knightmare Games, Limited" },
+      { label: "Release", value: "2027" },
       { label: "Platforms", value: "Windows, macOS (Apple Silicon), Linux" },
-      { label: "Input", value: "Mouse and keyboard" },
-      { label: "Release", value: "2027, wishlist now on Steam" },
+      { label: "Genre", value: "Action, Adventure, Casual, Indie, RPG" },
+      { label: "Tags", value: "Action RPG, Exploration, Hack and Slash, Character Customization, Loot, Magic" },
+      { label: "Players", value: "Single-player" },
+      { label: "Languages", value: "English" },
+      { label: "Controls", value: "Mouse and keyboard" },
       { label: "Price", value: "To be announced" },
       { label: "Store", value: "Steam", href: CQ_STEAM },
     ],
-    featuresHeading: "Your cursor, armed",
+    featuresHeading: "Features",
     features: [
-      { title: "Put your mouse skills to the test", text: "Your cursor movement drives positioning and weapons. Build momentum for a strike, dodge clear, and cast spells with a flick of the wrist." },
-      { title: "Build your cursor", text: "Sword and shield, two-handers, or spells. Mix in capes, prayers, pets, and rare gear to find a loadout that fits." },
-      { title: "Real skill progression", text: "Chop trees, mine ore, and fish with real cursor movement. Skills grow as you use them and unlock better resources and gear." },
+      {
+        title: "Put your mouse skills to the test",
+        text: "Your cursor movements drive your positioning and your weapons. Build momentum for a strike, move clear of an incoming attack, and cast powerful spells and incantations. All with a little flick of the wrist.",
+      },
+      {
+        title: "Build your cursor",
+        text: "Your cursor has two hands? Yeah. Don't think too hard about that. But you've got a ridiculous number of ways to put them to work. Go sword and shield, swing a heavy two-handed weapon, or start throwing spells around. Mix in capes, prayers, pets, and rare gear to find combinations that fit your playstyle. Or let something you find on an expedition give you an excuse to try a completely different build. There's a loadout for everyone out there.",
+      },
+      {
+        title: "Real skill progression",
+        text: "But that's not all your cursor can do. Swing an axe to chop trees, mine ore with your pickaxe, and cast a line to catch fish. Cook your catch for the next fight and turn your ore into new gear. Your skills grow as you use them, unlocking better resources and equipment. There's always another upgrade to work toward.",
+      },
+      {
+        title: "Find your next adventure",
+        text: "Head into handcrafted regions full of monsters, resources, and things worth wandering off the path for. Find your favorite places to train, venture into dungeons, and take on bosses that put your build and your skills to the test. Explore a living, changing world full of rare discoveries and new reasons to revisit your favorite places.",
+      },
     ],
     trailer: {
       title: "Announcement trailer",

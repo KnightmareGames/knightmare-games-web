@@ -46,7 +46,7 @@ export default async function GamePage({ params }: Params) {
 
   return (
     <div style={style}>
-      <PageHead kicker={game.tags[0]} title={game.name} lede={game.description[0]} art={<GameArt game={game} className="pagehead__plate" />}>
+      <PageHead kicker={game.tags[0]} title={game.name} lede={game.shortDescription ?? game.description[0]} art={<GameArt game={game} className="pagehead__plate" />}>
         <p className="pagehead__meta">
           <Status>{game.status}</Status>
           <span className="pagehead__facts">{game.tags.slice(1).join(" · ")}</span>

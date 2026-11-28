@@ -43,6 +43,7 @@ export default async function GamePressKit({ params }: Params) {
   if (!game) notFound();
   const style = { "--accent": game.accent, "--on-accent": game.accent === TINCTURES.or ? TINCTURES.sable : TINCTURES.argent } as CSSProperties;
   const steam = game.facts.find((f) => f.label === "Store")?.href;
+  const short = game.shortDescription ?? game.tagline;
 
   const sections: { id?: string; title: string; intro?: string; body: React.ReactNode }[] = [
     {
@@ -52,15 +53,15 @@ export default async function GamePressKit({ params }: Params) {
         <div className="split">
           <div className="presstext">
             <div className="copyblock">
-              <div className="copyblock__head"><h3>Short description</h3><CopyButton text={game.tagline} /></div>
-              <p>{game.tagline}</p>
+              <div className="copyblock__head"><h3>Short description</h3><CopyButton text={short} /></div>
+              <p>{short}</p>
             </div>
             <div className="copyblock">
               <div className="copyblock__head"><h3>Description</h3><CopyButton text={game.description.join("\n\n")} /></div>
               {game.description.map((p, i) => <p key={i}>{p}</p>)}
             </div>
             <div className="copyblock">
-              <div className="copyblock__head"><h3>{game.featuresHeading}</h3></div>
+              <div className="copyblock__head"><h3>{game.featuresHeading}</h3><CopyButton text={game.features.map((f) => `${f.title}\n${f.text}`).join("\n\n")} /></div>
               <ul className="list">
                 {game.features.map((f) => <li key={f.title}><strong>{f.title}.</strong> {f.text}</li>)}
               </ul>

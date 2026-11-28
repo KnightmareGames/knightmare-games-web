@@ -345,20 +345,13 @@ h3 { font: 700 24px/1.2 var(--label); letter-spacing: .01em; }
 /* ---------- The charter (home page About) ---------- */
 .charter {
   position: relative; max-width: fit-content; background: var(--argent); border: var(--line); box-shadow: var(--shadow);
-  padding: var(--s7) var(--s7) var(--s6);
+  padding: var(--s7);
 }
 .charter::before { /* a ruled inner border, like a scribe's frame */
   content: ""; position: absolute; inset: 10px; border: 1.5px solid var(--sable); pointer-events: none;
 }
-.charter { margin-bottom: calc(var(--s9) + var(--s6)); }
-.charter__ribbon { position: absolute; left: calc(50% - 23px); z-index: 0; bottom: -124px; width: 46px; height: 70px; background: var(--gules); border: var(--line); border-top: 0;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); }
-.charter .seal { position: absolute; z-index: 1; left: calc(50% - 62px); bottom: -84px; }
-.charter .seal { transform: rotate(-8deg); }
 @media (max-width: 600px) {
-  .charter { padding: var(--s5) var(--s4) var(--s7); }
+  .charter { padding: var(--s5) var(--s4); }
   .charter::before { inset: 6px; }
-  .charter .seal { width: 104px; height: 104px; bottom: -74px; left: calc(50% - 52px); }
-  .charter__ribbon { bottom: -110px; }
 }
 
