@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PRESS_EMAIL, games } from "@/content/games";
+import { DISCORD_URL, PRESS_EMAIL, games } from "@/content/games";
 import { Crest } from "@/components/Crest";
 import { Email } from "@/components/Email";
 import { GameArt } from "@/components/GameArt";
@@ -57,6 +57,7 @@ export default function Home() {
         <div className="btns">
           <a className="btn btn--ink" href={`mailto:${PRESS_EMAIL}`}>Email us</a>
           <Link className="btn btn--ghost" href="/presskit/">Press kits</Link>
+          <a className="btn btn--ghost" href={DISCORD_URL} rel="noopener">Join the Discord</a>
         </div>
       </Band>
     </>

@@ -79,7 +79,7 @@ Reviews graded **fundamentals explicitly**: section separation, hierarchy, spaci
 
 ## Open items
 
-- **Contact.** `PRESS_EMAIL` is `contact@knightmare.games` (the domain's mail is on Google; the owner believes the address aliases to him but hadn't tested it as of 2026-11-27). The Discord links were removed because the 2021 invite (`discord.gg/N72e47Etac`) has expired; add them back with a permanent invite.
+- **Contact and socials.** `PRESS_EMAIL` is `contact@knightmare.games` (the domain's mail is on Google; the owner believes the address aliases to him but hadn't tested it as of 2026-11-27). `DISCORD_URL` and `SOCIALS` in `games.ts` hold the Discord invite (permanent, supplied 2026-11-27), X and YouTube links; they show in the footer, the home contact band and each press kit's About block.
 - **Studio facts.** The hero and `STUDIO_BLURB` say Denver, Colorado, which the owner confirmed on 2026-11-27. The founding year is unknown.
 - **Spark art.** The capsule, header and six screenshots came from Steam's CDN (app 601130) on 2026-11-27. Steam only serves the screenshots at 920 × 459, and the game has no logo file there.
 - **LC4A sell sheet.** `public/assets/press/last-call-for-alcohol/sell-sheet.pdf` (and its preview) includes a personal name. Decide whether it ships as-is or gets a studio-only version.

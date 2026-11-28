@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { statSync } from "node:fs";
 import { join } from "node:path";
 import { notFound } from "next/navigation";
-import { PRESS_EMAIL, PRESS_UPDATED, STUDIO_BLURB, TINCTURES, factsAsText, games, getGame } from "@/content/games";
+import { PRESS_EMAIL, PRESS_UPDATED, SOCIALS, STUDIO_BLURB, TINCTURES, factsAsText, games, getGame } from "@/content/games";
 import { GameArt } from "@/components/GameArt";
 import { Band, PageHead } from "@/components/PageHead";
 import { CopyButton } from "@/components/CopyButton";
@@ -75,6 +75,9 @@ export default async function GamePressKit({ params }: Params) {
             <div className="copyblock">
               <div className="copyblock__head"><h3>About Knightmare Games</h3><CopyButton text={STUDIO_BLURB} /></div>
               <p>{STUDIO_BLURB}</p>
+              <p className="copyblock__links">
+                {SOCIALS.map((s) => <a key={s.label} href={s.href} rel="noopener">{s.label}</a>)}
+              </p>
             </div>
           </div>
           <Ledger facts={game.facts} copyText={factsAsText(game)} seal={PRESS_UPDATED} />

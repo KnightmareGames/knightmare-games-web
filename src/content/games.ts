@@ -3,6 +3,12 @@
 // at /presskit/<slug>/.
 
 export const PRESS_EMAIL = "contact@knightmare.games";
+export const DISCORD_URL = "https://discord.gg/KHKPuXfq6S";
+export const SOCIALS = [
+  { label: "Discord", href: DISCORD_URL },
+  { label: "X", href: "https://x.com/Knightmare_ES" },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UCzAYSSMF095XRlV1PKJGkmw" },
+];
 /** Shown on the press kits' seal. */
 export const PRESS_UPDATED = "November 2026";
 /** The studio boilerplate on every game's press kit. */
