@@ -213,10 +213,6 @@ h3 { font: 700 24px/1.2 var(--label); letter-spacing: .01em; }
 .split { display: grid; grid-template-columns: 7fr 5fr; gap: var(--s8); align-items: start; }
 .split--center { align-items: center; }
 .split--center > * { min-width: 0; }
-.seal { flex: none; transform: rotate(-10deg); filter: drop-shadow(4px 4px 0 var(--sable)); }
-.seal__ring { font: 700 12px/1 var(--label); letter-spacing: .1em; fill: var(--argent); }
-.seal__month { font: 900 18px/1 var(--label); fill: var(--argent); text-transform: uppercase; letter-spacing: .08em; }
-.seal__year { font: 900 17px/1 var(--label); fill: var(--or); }
 
 /* ---------- Prose ---------- */
 .prose p { max-width: var(--measure); text-wrap: pretty; }
@@ -245,8 +241,6 @@ h3 { font: 700 24px/1.2 var(--label); letter-spacing: .01em; }
 
 /* ---------- Ledger (fact sheet) ---------- */
 .ledger { position: relative; background: var(--argent); border: var(--line); box-shadow: var(--shadow); }
-.ledger .seal { position: absolute; top: -64px; right: -20px; z-index: 3; }
-.ledger:has(.seal) .ledger__title { padding-right: 128px; }
 .ledger__title {
   display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-height: 60px;
   font: 900 24px/1 var(--blackletter); padding: var(--s3) var(--s4);
@@ -335,9 +329,6 @@ h3 { font: 700 24px/1.2 var(--label); letter-spacing: .01em; }
   .btns .btn { flex: 1 1 100%; }
   .btns--center .btn { flex: none; }
   .btn--small { min-height: 44px; }
-  .ledger .seal { width: 96px; height: 96px; top: -48px; right: -6px; }
-  .ledger:has(.seal) .ledger__title { padding-right: 112px; }
-  .split:has(.ledger .seal) { gap: var(--s8); }
   .crest-download { grid-template-columns: 1fr; }
   .crest-download__img { border-right: 0; border-bottom: var(--line); }
   .crest-download figcaption { padding: 0 var(--s4) var(--s5); }

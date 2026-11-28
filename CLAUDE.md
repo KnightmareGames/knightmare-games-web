@@ -22,13 +22,13 @@ The Knightmare Games studio site. It shows the studio's games and hosts a press 
 
 ## Where things live
 
-- `src/content/games.ts`: all game content (name, status, accent tincture, arms, tagline, description, tags, art, primary link, facts, features, press points, trailer, screenshots, downloads, press zip) plus `PRESS_EMAIL` (the one contact address, used on the home page and every press kit), `PRESS_UPDATED`, and `STUDIO_BLURB` (the studio boilerplate on each game's press kit). The first entry is the featured game on the home page; the rest are cards under "More games". A new entry gets `/games/<slug>/` and `/presskit/<slug>/` with no other changes.
+- `src/content/games.ts`: all game content (name, status, accent tincture, arms, tagline, description, tags, art, primary link, facts, features, press points, trailer, screenshots, downloads, press zip) plus `PRESS_EMAIL` (the one contact address, used on the home page and every press kit), and `STUDIO_BLURB` (the studio boilerplate on each game's press kit). The first entry is the featured game on the home page; the rest are cards under "More games". A new entry gets `/games/<slug>/` and `/presskit/<slug>/` with no other changes.
 - `src/app/`: `page.tsx` (home), `games/[slug]`, `presskit` (index), `presskit/[slug]`, `not-found.tsx`, `layout.tsx` (metadata, OG card).
 - `src/components/`:
   - `PageHead` (the one page header) and `Band` (the one section).
   - `GameCard` (the game's shield sits beside its name, never over the art), `Ledger` (fact sheet, press kits only), `Status`.
   - `Trailer` (self-hosted MP4 with a poster) and `Screenshots` (thumbnails that open the full file). A game with a `trailer` or `screenshots` gets those bands on its game page and press kit; band tones alternate by position.
-  - `Features`, `Downloads`, `Seal`, `Crest`, `Arms`, `Email`, `Nav`, `Header`, `Footer`, `CopyButton`.
+  - `Features`, `Downloads`, `Crest`, `Arms`, `Email`, `Nav`, `Header`, `Footer`, `CopyButton`.
 - `src/app/globals.css`: the whole design system. Its header comment states the rules.
 - `public/`:
   - `assets/img` (site images) and `assets/press/<game>/` (press downloads, zipped at build).
@@ -37,7 +37,7 @@ The Knightmare Games studio site. It shows the studio's games and hosts a press 
 
 ## Design direction and rules
 
-Neobrutalism plus heraldry, meant to feel like the studio's own work, not generic AI output. **Fundamentals come before ornament, and less content beats more.** The owner would rather the site say less and be clean and clear than carry anything that repeats itself or isn't useful. A 2026-11-27 audit against ten indie studio sites (Supergiant, Team Cherry, Klei, Mega Crit, Extremely OK, Aggro Crab, Landfall, Innersloth, Yacht Club, Lucas Pope) cut the home fact table, the game pages' fact wall, numbered feature cards, colour swatches, the hanging banners and the Play page. The owner then removed the ribbon and wax seal under the home page's About box, and asked for the yellow Q icon (the game's current one), not the earlier green. Don't add them back. Before adding a section, check that it says something no other section on the page already says.
+Neobrutalism plus heraldry, meant to feel like the studio's own work, not generic AI output. **Fundamentals come before ornament, and less content beats more.** The owner would rather the site say less and be clean and clear than carry anything that repeats itself or isn't useful. A 2026-11-27 audit against ten indie studio sites (Supergiant, Team Cherry, Klei, Mega Crit, Extremely OK, Aggro Crab, Landfall, Innersloth, Yacht Club, Lucas Pope) cut the home fact table, the game pages' fact wall, numbered feature cards, colour swatches, the hanging banners and the Play page. The owner then removed the wax seals (the one with a ribbon under the home page's About box and the one on the press kit fact sheets), and asked for the yellow Q icon (the game's current one), not the earlier green. Don't add them back. Before adding a section, check that it says something no other section on the page already says.
 
 - **Pages.**
   - Home: a one-line hero, the featured game with its trailer and store button, the other games as cards, a short About, then contact.
@@ -65,7 +65,7 @@ Neobrutalism plus heraldry, meant to feel like the studio's own work, not generi
   - Touch targets are at least 44px.
   - The press kit puts the fact sheet first.
   - The nav shows Games, Press and Contact (About moves to the footer).
-- **Ornament** (seal, charter, crest, pennant nav, battlement footer, gold-arrow cursor) is welcome, but only where it doesn't fight the rules above and never on top of a game's art.
+- **Ornament** (charter, crest, pennant nav, battlement footer, gold-arrow cursor) is welcome, but only where it doesn't fight the rules above and never on top of a game's art.
 
 ## How design work was reviewed
 

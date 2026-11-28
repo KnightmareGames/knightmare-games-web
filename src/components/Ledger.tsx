@@ -1,12 +1,10 @@
 import type { Fact } from "@/content/games";
 import { CopyButton } from "./CopyButton";
 import { Email } from "./Email";
-import { Seal } from "./Seal";
 
-export function Ledger({ title = "Fact sheet", facts, copyText, seal }: { title?: string; facts: Fact[]; copyText?: string; seal?: string }) {
+export function Ledger({ title = "Fact sheet", facts, copyText }: { title?: string; facts: Fact[]; copyText?: string }) {
   return (
     <aside className="ledger">
-      {seal && <Seal date={seal} />}
       <div className="ledger__title">
         <span>{title}</span>
         {copyText && <CopyButton text={copyText} label="Copy" />}

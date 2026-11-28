@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { statSync } from "node:fs";
 import { join } from "node:path";
 import { notFound } from "next/navigation";
-import { PRESS_EMAIL, PRESS_UPDATED, SOCIALS, STUDIO_BLURB, TINCTURES, factsAsText, games, getGame } from "@/content/games";
+import { PRESS_EMAIL, SOCIALS, STUDIO_BLURB, TINCTURES, factsAsText, games, getGame } from "@/content/games";
 import { GameArt } from "@/components/GameArt";
 import { Band, PageHead } from "@/components/PageHead";
 import { CopyButton } from "@/components/CopyButton";
@@ -80,7 +80,7 @@ export default async function GamePressKit({ params }: Params) {
               </p>
             </div>
           </div>
-          <Ledger facts={game.facts} copyText={factsAsText(game)} seal={PRESS_UPDATED} />
+          <Ledger facts={game.facts} copyText={factsAsText(game)} />
         </div>
       ),
     },

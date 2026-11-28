@@ -9,8 +9,6 @@ export const SOCIALS = [
   { label: "X", href: "https://x.com/Knightmare_ES" },
   { label: "YouTube", href: "https://www.youtube.com/channel/UCzAYSSMF095XRlV1PKJGkmw" },
 ];
-/** Shown on the press kits' seal. */
-export const PRESS_UPDATED = "November 2026";
 /** The studio boilerplate on every game's press kit. */
 export const STUDIO_BLURB =
   "Knightmare Games is a small independent studio in Denver, Colorado, making video games and tabletop games. Its games are Cursor Quest, an action RPG you play as your mouse cursor; Spark, a free arcade shooter on Steam; and Last Call for Alcohol, a drinking card game.";
