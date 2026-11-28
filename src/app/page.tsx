@@ -1,62 +1,64 @@
 import Link from "next/link";
-import { DISCORD_URL, games } from "@/content/games";
-import { BannerHall } from "@/components/BannerHall";
-import { GameCard } from "@/components/GameCard";
-import { Seal } from "@/components/Seal";
+import { PRESS_EMAIL, games } from "@/content/games";
 import { Crest } from "@/components/Crest";
+import { Email } from "@/components/Email";
+import { GameArt } from "@/components/GameArt";
+import { GameCard } from "@/components/GameCard";
 import { Band, PageHead } from "@/components/PageHead";
+import { Seal } from "@/components/Seal";
+import { Status } from "@/components/Status";
+import { Trailer } from "@/components/Trailer";
 
 export default function Home() {
+  const [featured, ...others] = games;
+
   return (
     <>
       <PageHead
         hero
         kicker="Independent game studio"
         title="Here be games."
-        lede="We make video games and tabletop games: an action RPG you play as your mouse cursor, a free arcade shooter, and a drinking card game."
+        lede="Video games and tabletop games, made in Denver, Colorado."
         art={<Crest />}
-      >
-        <div className="btns">
-          <Link className="btn btn--primary" href="#games">See the games</Link>
-          <Link className="btn" href="#about">About the studio</Link>
-        </div>
-      </PageHead>
+      />
 
-      <Band id="games" tone="deep" title="Our games" intro="Three games, three very different evenings.">
-        <div className="hall-wrap"><BannerHall games={games} /></div>
-        <div className="game-rows">
-          {games.map((g) => <GameCard key={g.slug} game={g} href={`/games/${g.slug}/`} idPrefix="row" row />)}
-        </div>
-      </Band>
-
-      <Band id="about" title="About the studio">
-        <div className="split">
-          <div className="charter">
-            <div className="prose">
-              <p className="illuminated">
-                We&apos;re a small, independent studio making video games, tabletop games, and the odd game jam
-                experiment. We&apos;re drawn to ideas that sound a little strange at first, like playing an RPG as your
-                mouse cursor, and we keep going until they feel obvious.
-              </p>
+      <Band id="games" tone="deep" title={featured.name}>
+        <div className="split split--center">
+          {featured.trailer ? <Trailer trailer={featured.trailer} /> : <GameArt game={featured} className="pagehead__plate" />}
+          <div>
+            <p className="lede">{featured.description[0]}</p>
+            <p><Status>{featured.status}</Status></p>
+            <div className="btns">
+              <a className="btn btn--primary" href={featured.primaryLink.href} rel="noopener">{featured.primaryLink.label}</a>
+              <Link className="btn" href={`/games/${featured.slug}/`}>Game page</Link>
             </div>
-            <span className="charter__ribbon" aria-hidden="true" />
-            <Seal ring={"KNIGHTMARE GAMES · KNIGHTMARE GAMES · "} lines={["KG", ""]} />
           </div>
-          <aside className="ledger">
-            <div className="ledger__title"><span>The studio</span></div>
-            <dl>
-              <div className="ledger__row"><dt>Name</dt><dd>Knightmare Games, Limited</dd></div>
-              <div className="ledger__row"><dt>Making</dt><dd><Link href="/games/cursor-quest/">Cursor Quest</Link>, out in 2027</dd></div>
-              <div className="ledger__row"><dt>Press</dt><dd><Link href="/presskit/">Press kits</Link> for every game</dd></div>
-              <div className="ledger__row"><dt>Discord</dt><dd><a href={DISCORD_URL} rel="noopener">Join the community</a></dd></div>
-            </dl>
-          </aside>
         </div>
       </Band>
 
-      <Band id="contact" tone="gules" title="Press and contact" intro="Every game has a press kit with facts, copy, and art. For anything else, find us on Discord.">
+      <Band title="More games">
+        <div className="cards cards--pair">
+          {others.map((g) => <GameCard key={g.slug} game={g} href={`/games/${g.slug}/`} idPrefix="home" />)}
+        </div>
+      </Band>
+
+      <Band id="about" tone="deep" title="About the studio">
+        <div className="charter">
+          <div className="prose">
+            <p className="illuminated">
+              We&apos;re a small, independent studio making video games, tabletop games, and the odd game jam
+              experiment. We&apos;re drawn to ideas that sound a little strange at first, like playing an RPG as your
+              mouse cursor, and we keep going until they feel obvious.
+            </p>
+          </div>
+          <span className="charter__ribbon" aria-hidden="true" />
+          <Seal ring={"KNIGHTMARE GAMES · KNIGHTMARE GAMES · "} lines={["KG", ""]} />
+        </div>
+      </Band>
+
+      <Band id="contact" tone="gules" title="Press and contact" intro={<>Every game has a press kit with facts, copy, and art. For anything else, write to <Email address={PRESS_EMAIL} />.</>}>
         <div className="btns">
-          <a className="btn btn--ink" href={DISCORD_URL} rel="noopener">Join the Discord</a>
+          <a className="btn btn--ink" href={`mailto:${PRESS_EMAIL}`}>Email us</a>
           <Link className="btn btn--ghost" href="/presskit/">Press kits</Link>
         </div>
       </Band>

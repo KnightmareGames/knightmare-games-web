@@ -1,12 +1,13 @@
 // Every game on the site lives here. Add a game by adding an entry:
 // it gets a card on the home page, a page at /games/<slug>/, and a press kit
-// at /presskit/<slug>/ (unless `pressKitHref` points somewhere else).
+// at /presskit/<slug>/.
 
-export const DISCORD_URL = "https://discord.gg/N72e47Etac";
-/** Set this to show a press email on every press kit. */
-export const PRESS_EMAIL: string | null = null;
+export const PRESS_EMAIL = "contact@knightmare.games";
 /** Shown on the press kits' seal. */
 export const PRESS_UPDATED = "November 2026";
+/** The studio boilerplate on every game's press kit. */
+export const STUDIO_BLURB =
+  "Knightmare Games is a small independent studio in Denver, Colorado, making video games and tabletop games. Its games are Cursor Quest, an action RPG you play as your mouse cursor; Spark, a free arcade shooter on Steam; and Last Call for Alcohol, a drinking card game.";
 
 /** Heraldic tinctures. Metals (or, argent) go on colours (sable, gules, azure, vert), never metal on metal. */
 export const TINCTURES = {
@@ -31,6 +32,8 @@ export type Arms = {
 export type Fact = { label: string; value: string; href?: string };
 export type Feature = { title: string; text: string };
 export type Download = { label: string; detail: string; preview: string; file: string };
+export type Screenshot = { caption?: string; detail: string; preview: string; file: string };
+export type Trailer = { title: string; detail: string; poster: string; file: string };
 
 export type Game = {
   slug: string;
@@ -44,22 +47,31 @@ export type Game = {
   /** Paragraphs for the game page and press kit. */
   description: string[];
   tags: string[];
-  art?: { src: string; alt: string; fit: "cover" | "contain"; background: string; showsTitle?: boolean };
+  art: { src: string; alt: string; fit: "cover" | "contain"; background: string };
   primaryLink: { label: string; href: string };
   facts: Fact[];
   featuresHeading: string;
   features: Feature[];
   pressPoints?: { heading: string; items: string[] };
+  trailer?: Trailer;
+  screenshots?: Screenshot[];
   downloads?: Download[];
   /** A zip in public/assets/press/, built from the folder of the same name. */
   pressZip?: string;
-  /** Set when the press kit is a standalone page in /public. */
-  pressKitHref?: string;
 };
 
 const SPARK_STEAM = "https://store.steampowered.com/app/601130/Spark/";
 const CQ_STEAM = "https://store.steampowered.com/app/5297900/Cursor_Quest/";
 const LC4A_SITE = "https://www.lc4a.com/";
+
+const CQ_PRESS = "/assets/press/cursor-quest";
+const CQ_IMG = "/assets/img/cursor-quest";
+const cqShot = (file: string, caption: string): Screenshot => ({
+  caption,
+  detail: "PNG, 1920 × 1080",
+  preview: `${CQ_IMG}/shots/${file}.webp`,
+  file: `${CQ_PRESS}/screenshots/cursor-quest-${file}.png`,
+});
 
 export const games: Game[] = [
   {
@@ -74,25 +86,49 @@ export const games: Game[] = [
       "Cursor Quest is a single-player action RPG where you play as your cursor. Swing weapons, defeat monsters, gather resources, craft gear, find epic and rare equipment, and work your way through dozens of handcrafted regions.",
     ],
     tags: ["Action RPG", "PC, Mac, Linux"],
-    art: { src: "/assets/img/cursor-quest/capsule-wide.jpg", alt: "Cursor Quest key art", fit: "cover", background: "#bfe3a5", showsTitle: true },
+    art: { src: "/assets/img/cursor-quest/capsule-wide.jpg", alt: "Cursor Quest key art", fit: "cover", background: "#bfe3a5" },
     primaryLink: { label: "Wishlist on Steam", href: CQ_STEAM },
     facts: [
+      { label: "Developer", value: "Knightmare Games, Limited" },
       { label: "Genre", value: "Action RPG" },
       { label: "Players", value: "Single-player" },
       { label: "Platforms", value: "Windows, macOS (Apple Silicon), Linux" },
       { label: "Input", value: "Mouse and keyboard" },
       { label: "Release", value: "2027, wishlist now on Steam" },
+      { label: "Price", value: "To be announced" },
       { label: "Store", value: "Steam", href: CQ_STEAM },
     ],
     featuresHeading: "Your cursor, armed",
     features: [
-      { title: "Your cursor is the hero", text: "No avatar and no click-to-move. The arrow holds the sword, takes the hits, and earns the levels." },
       { title: "Put your mouse skills to the test", text: "Your cursor movement drives positioning and weapons. Build momentum for a strike, dodge clear, and cast spells with a flick of the wrist." },
       { title: "Build your cursor", text: "Sword and shield, two-handers, or spells. Mix in capes, prayers, pets, and rare gear to find a loadout that fits." },
       { title: "Real skill progression", text: "Chop trees, mine ore, and fish with real cursor movement. Skills grow as you use them and unlock better resources and gear." },
-      { title: "Find your next adventure", text: "Dungeons, bosses, rare discoveries, and a living world that changes over time." },
     ],
-    pressKitHref: "/presskit/cursor-quest/index.html",
+    trailer: {
+      title: "Announcement trailer",
+      detail: "MP4, 1920 × 1080, 60 fps, 1:20",
+      poster: `${CQ_IMG}/trailer-poster.jpg`,
+      file: `${CQ_PRESS}/cursor-quest-announcement-trailer.mp4`,
+    },
+    screenshots: [
+      cqShot("01-warden", "Fighting the Brimstone Warden"),
+      cqShot("02-lightning", "Calling down lightning in a dungeon"),
+      cqShot("03-mining", "Mining ore"),
+      cqShot("04-fishing", "Fishing at the lake"),
+      cqShot("05-broodmother", "The Broodmother appears"),
+      cqShot("06-frost-wand", "A yeti frozen by the frost wand"),
+    ],
+    downloads: [
+      { label: "Logo", detail: "SVG, vector", preview: `${CQ_IMG}/logo.svg`, file: `${CQ_PRESS}/logo.svg` },
+      { label: "Logo", detail: "PNG, 1280 × 755, transparent", preview: `${CQ_IMG}/logo-1280.webp`, file: `${CQ_PRESS}/logo-1280.png` },
+      { label: "Q icon", detail: "PNG, 1024 × 1024", preview: `${CQ_IMG}/icon.webp`, file: `${CQ_PRESS}/icon-1024.png` },
+      { label: "Key art, wide", detail: "PNG, 2000 × 754", preview: `${CQ_IMG}/key-art-wide.webp`, file: `${CQ_PRESS}/key-art-wide.png` },
+      { label: "Main capsule", detail: "PNG, 1232 × 706", preview: `${CQ_IMG}/capsule-main.webp`, file: `${CQ_PRESS}/capsule-main-1232x706.png` },
+      { label: "Header capsule", detail: "PNG, 920 × 430", preview: `${CQ_IMG}/capsule-header.webp`, file: `${CQ_PRESS}/capsule-header-920x430.png` },
+      { label: "Vertical capsule", detail: "PNG, 748 × 896", preview: `${CQ_IMG}/capsule-vertical.webp`, file: `${CQ_PRESS}/capsule-vertical-748x896.png` },
+      { label: "Hero art, no logo", detail: "PNG, 3840 × 1240", preview: `${CQ_IMG}/hero.webp`, file: `${CQ_PRESS}/hero-3840x1240.png` },
+    ],
+    pressZip: "/assets/press/cursor-quest.zip",
   },
   {
     slug: "spark",
@@ -106,10 +142,16 @@ export const games: Game[] = [
       "Learn the bullets, chain the combos, and push your score up the Steam leaderboards.",
     ],
     tags: ["Shoot 'em up", "Windows, Mac"],
+    art: { src: "/assets/img/spark/capsule.jpg", alt: "Spark key art", fit: "cover", background: "#15110e" },
     primaryLink: { label: "Play free on Steam", href: SPARK_STEAM },
+    screenshots: [1, 2, 3, 4, 5, 6].map((n) => ({
+      detail: "JPG, 920 × 459",
+      preview: `/assets/img/spark/shots/0${n}.webp`,
+      file: `/assets/press/spark/screenshots/spark-0${n}.jpg`,
+    })),
     downloads: [
-      { label: "Logo", detail: "PNG, 1368 × 504, transparent", preview: "/assets/img/spark/logo.webp", file: "/assets/press/spark/logo.png" },
-      { label: "Title plate", detail: "PNG, 1920 × 1200", preview: "/assets/img/spark/title-plate.webp", file: "/assets/press/spark/title-plate.png" },
+      { label: "Capsule art", detail: "JPG, 616 × 353", preview: "/assets/img/spark/capsule.jpg", file: "/assets/press/spark/spark-capsule-616x353.jpg" },
+      { label: "Header", detail: "JPG, 460 × 215", preview: "/assets/press/spark/spark-header-460x215.jpg", file: "/assets/press/spark/spark-header-460x215.jpg" },
     ],
     pressZip: "/assets/press/spark.zip",
     facts: [
@@ -183,7 +225,7 @@ export function getGame(slug: string): Game | undefined {
 }
 
 export function pressKitHref(game: Game): string {
-  return game.pressKitHref ?? `/presskit/${game.slug}/`;
+  return `/presskit/${game.slug}/`;
 }
 
 /** The fact sheet as plain text, for the copy button. */

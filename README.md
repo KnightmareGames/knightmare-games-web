@@ -12,13 +12,11 @@ npm run build    # writes the static site to out/
 
 ## Where things are
 
-- `src/content/games.ts`: every game's text, facts, features, links and press downloads. Adding a game here gives it a home page card, a page at `/games/<slug>/` and a press kit at `/presskit/<slug>/`.
-- `src/app/`: the pages (home, `games/[slug]`, `presskit`, `presskit/[slug]`, `play`, 404).
+- `src/content/games.ts`: every game's text, facts, features, links and press downloads. The first game is featured on the home page; the rest are cards. Each gets a page at `/games/<slug>/` and a press kit at `/presskit/<slug>/`.
+- `src/app/`: the pages (home, `games/[slug]`, `presskit`, `presskit/[slug]`, 404).
 - `src/components/`: header, footer, cards, the ledger (fact sheet), features, downloads.
 - `src/app/globals.css`: the whole look. Neobrutalist (thick ink borders, hard offset shadows) with manuscript and heraldry touches (blackletter titles, illuminated initials, a crest).
-- `public/`: images, press downloads, `CNAME`, and standalone pages:
-  - `public/presskit/cursor-quest/` is a self-contained press kit page.
-  - HTML5 builds go in `public/play/<game>/` and get linked from `src/app/play/page.tsx`.
+- `public/`: images, press downloads (`assets/press/<game>/`, zipped at build), and `CNAME`.
 
 ## Deploying
 

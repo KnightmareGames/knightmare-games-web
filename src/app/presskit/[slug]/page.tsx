@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { statSync } from "node:fs";
 import { join } from "node:path";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DISCORD_URL, PRESS_EMAIL, PRESS_UPDATED, TINCTURES, factsAsText, games, getGame } from "@/content/games";
+import { PRESS_EMAIL, PRESS_UPDATED, STUDIO_BLURB, TINCTURES, factsAsText, games, getGame } from "@/content/games";
 import { GameArt } from "@/components/GameArt";
 import { Band, PageHead } from "@/components/PageHead";
 import { CopyButton } from "@/components/CopyButton";
 import { Downloads } from "@/components/Downloads";
+import { Email } from "@/components/Email";
 import { Ledger } from "@/components/Ledger";
+import { Screenshots } from "@/components/Screenshots";
+import { Trailer } from "@/components/Trailer";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -23,39 +25,30 @@ function sizeOf(href: string): string | null {
   }
 }
 
-// Games whose press kit is a standalone page in /public are skipped here.
+const withSize = (detail: string, href: string) => [detail, sizeOf(href)].filter(Boolean).join(", ");
+
 export function generateStaticParams() {
-  return games.filter((g) => !g.pressKitHref).map((g) => ({ slug: g.slug }));
+  return games.map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const game = getGame((await params).slug);
   if (!game) return {};
-  const image = game.art?.src ?? `/assets/img/${game.slug}/title-plate.webp`;
   const title = `${game.name} press kit`;
-  return { title, description: game.tagline, openGraph: { title, description: game.tagline, images: [{ url: image, alt: game.art?.alt ?? `${game.name} title art` }] } };
+  return { title, description: game.tagline, openGraph: { title, description: game.tagline, images: [{ url: game.art.src, alt: game.art.alt }] } };
 }
 
 export default async function GamePressKit({ params }: Params) {
   const game = getGame((await params).slug);
-  if (!game || game.pressKitHref) notFound();
+  if (!game) notFound();
   const style = { "--accent": game.accent, "--on-accent": game.accent === TINCTURES.or ? TINCTURES.sable : TINCTURES.argent } as CSSProperties;
   const steam = game.facts.find((f) => f.label === "Store")?.href;
 
-  return (
-    <div style={style}>
-      <PageHead kicker="Press kit" title={game.name} lede={game.tagline} art={<GameArt game={game} className="pagehead__plate" />}>
-        <p className="pagehead__meta">
-          <strong>Press contact:</strong>{" "}
-          {PRESS_EMAIL ? <a href={`mailto:${PRESS_EMAIL}`}>{PRESS_EMAIL}</a> : <a href={DISCORD_URL} rel="noopener">Discord</a>}
-        </p>
-        <div className="btns">
-          {game.pressZip && <a className="btn btn--primary" href={game.pressZip} download>Download all&nbsp;<span className="nowrap">(ZIP{sizeOf(game.pressZip) ? `, ${sizeOf(game.pressZip)}` : ""})</span></a>}
-          <Link className={`btn${game.pressZip ? "" : " btn--primary"}`} href={`/games/${game.slug}/`}>Game page</Link>
-        </div>
-      </PageHead>
-
-      <Band tone="deep" title="Facts and copy" intro="Copy anything here as-is.">
+  const sections: { id?: string; title: string; intro?: string; body: React.ReactNode }[] = [
+    {
+      title: "Facts and copy",
+      intro: "Copy anything here as-is.",
+      body: (
         <div className="split">
           <div className="presstext">
             <div className="copyblock">
@@ -78,20 +71,56 @@ export default async function GamePressKit({ params }: Params) {
                 <ul className="list">{game.pressPoints.items.map((i) => <li key={i}>{i}</li>)}</ul>
               </div>
             )}
+            <div className="copyblock">
+              <div className="copyblock__head"><h3>About Knightmare Games</h3><CopyButton text={STUDIO_BLURB} /></div>
+              <p>{STUDIO_BLURB}</p>
+            </div>
           </div>
           <Ledger facts={game.facts} copyText={factsAsText(game)} seal={PRESS_UPDATED} />
         </div>
-      </Band>
+      ),
+    },
+  ];
+  if (game.trailer) {
+    sections.push({ id: "trailer", title: "Trailer", body: <Trailer trailer={game.trailer} detail={withSize(game.trailer.detail, game.trailer.file)} /> });
+  }
+  if (game.screenshots) {
+    sections.push({
+      id: "screenshots",
+      title: "Screenshots",
+      intro: "Each one opens at full size.",
+      body: <Screenshots game={game.name} items={game.screenshots} details={game.screenshots.map((s) => withSize(s.detail, s.file))} />,
+    });
+  }
+  sections.push({
+    id: "art",
+    title: "Art and downloads",
+    intro: `Free to use in coverage of ${game.name}.`,
+    body: game.downloads ? (
+      <Downloads items={game.downloads.map((d) => ({ ...d, detail: withSize(d.detail, d.file) }))} background={game.art.background} />
+    ) : (
+      <p className="notice">
+        Art for {game.name} is being gathered.{steam && <> Screenshots are on the <a href={steam} rel="noopener">Steam page</a> in the meantime.</>}
+      </p>
+    ),
+  });
 
-      <Band title="Art and downloads">
-        {game.downloads ? (
-          <Downloads items={game.downloads.map((d) => ({ ...d, detail: [d.detail, sizeOf(d.file)].filter(Boolean).join(", ") }))} background={game.art?.background} />
-        ) : (
-          <p className="notice">
-            Art for {game.name} is being gathered.{steam && <> Screenshots are on the <a href={steam} rel="noopener">Steam page</a> in the meantime.</>}
-          </p>
-        )}
-      </Band>
+  return (
+    <div style={style}>
+      <PageHead kicker="Press kit" title={game.name} lede={game.tagline} art={<GameArt game={game} className="pagehead__plate" />}>
+        <p className="pagehead__meta">
+          <strong>Press contact:</strong>{" "}
+          <Email address={PRESS_EMAIL} />
+        </p>
+        <div className="btns">
+          {game.pressZip && <a className="btn btn--primary" href={game.pressZip} download>Download all&nbsp;<span className="nowrap">(ZIP{sizeOf(game.pressZip) ? `, ${sizeOf(game.pressZip)}` : ""})</span></a>}
+          <a className={`btn${game.pressZip ? "" : " btn--primary"}`} href={game.primaryLink.href} rel="noopener">{game.primaryLink.label}</a>
+        </div>
+      </PageHead>
+
+      {sections.map((s, i) => (
+        <Band key={s.title} id={s.id} tone={i % 2 ? "light" : "deep"} title={s.title} intro={s.intro}>{s.body}</Band>
+      ))}
     </div>
   );
 }

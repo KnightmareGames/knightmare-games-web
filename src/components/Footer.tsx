@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { DISCORD_URL } from "@/content/games";
 
 export function Footer() {
   return (
@@ -14,7 +13,6 @@ export function Footer() {
           <Link href="/presskit/">Press</Link>
           <Link href="/#about">About</Link>
           <Link href="/#contact">Contact</Link>
-          <a href={DISCORD_URL} rel="noopener">Discord ↗</a>
         </nav>
       </div>
     </footer>

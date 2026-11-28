@@ -4,7 +4,7 @@ export function Downloads({ items, background }: { items: Download[]; background
   return (
     <div className="downloads">
       {items.map((d) => (
-        <figure key={d.label} className="download">
+        <figure key={d.file} className="download">
           <div className="download__img" style={{ background }}>
             <img src={d.preview} alt="" loading="lazy" />
           </div>

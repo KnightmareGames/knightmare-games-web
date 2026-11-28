@@ -1,23 +1,21 @@
 import type { Fact } from "@/content/games";
 import { CopyButton } from "./CopyButton";
+import { Email } from "./Email";
 import { Seal } from "./Seal";
 
-// `wide` lays the facts out as a row of cells, for a band of its own.
-export function Ledger({ title = "Fact sheet", facts, copyText, seal, wide = false }: { title?: string; facts: Fact[]; copyText?: string; seal?: string; wide?: boolean }) {
+export function Ledger({ title = "Fact sheet", facts, copyText, seal }: { title?: string; facts: Fact[]; copyText?: string; seal?: string }) {
   return (
-    <aside className={`ledger${wide ? " ledger--wide" : ""}`}>
+    <aside className="ledger">
       {seal && <Seal date={seal} />}
-      {!wide && (
-        <div className="ledger__title">
-          <span>{title}</span>
-          {copyText && <CopyButton text={copyText} label="Copy" />}
-        </div>
-      )}
+      <div className="ledger__title">
+        <span>{title}</span>
+        {copyText && <CopyButton text={copyText} label="Copy" />}
+      </div>
       <dl>
         {facts.map((f) => (
           <div key={f.label} className="ledger__row">
             <dt>{f.label}</dt>
-            <dd>{f.href ? <a href={f.href} rel="noopener">{f.value}</a> : f.value}</dd>
+            <dd>{f.href?.startsWith("mailto:") ? <Email address={f.value} /> : f.href ? <a href={f.href} rel="noopener">{f.value}</a> : f.value}</dd>
           </div>
         ))}
       </dl>
